@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: basics-boot27
+  thymeleaf:
+    cache: false
+
+logging:
+  level:
+    # フィルタチェーンの中身や認可の判定を見たいときに DEBUG にする（学習時にとても有用）
+    org.springframework.security: INFO
+    # 起動ログに「どのフィルタが何順で並んでいるか」を出したいときは下を DEBUG にする
+    # org.springframework.security.web.FilterChainProxy: DEBUG

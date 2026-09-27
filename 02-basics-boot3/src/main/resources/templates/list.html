@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title th:text="${title}">list</title></head>
+<body>
+<h1 th:text="${title}">title</h1>
+<table border="1">
+  <tr><th>id</th><th>owner</th><th>amount</th><th>approved</th></tr>
+  <tr th:each="o : ${orders}">
+    <td th:text="${o.id}">1</td>
+    <td th:text="${o.owner}">owner</td>
+    <td th:text="${o.amount}">0</td>
+    <td th:text="${o.approved}">false</td>
+  </tr>
+</table>
+<p><a th:href="@{/}">トップへ</a></p>
+</body>
+</html>

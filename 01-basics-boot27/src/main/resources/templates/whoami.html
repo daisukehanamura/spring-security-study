@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>whoami</title>
+</head>
+<body>
+<h1>認証情報</h1>
+<ul>
+  <li>ユーザー名: <span th:text="${name}">name</span></li>
+  <li>権限: <span th:text="${authorities}">authorities</span></li>
+  <li>Authentication の実装クラス: <span th:text="${authClass}">class</span></li>
+</ul>
+<p><a th:href="@{/}">トップへ</a></p>
+</body>
+</html>

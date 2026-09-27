@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>02 basics (Boot 3.x)</title>
+</head>
+<body>
+<h1>Spring Boot 3.5 / Spring Security 6.5 サンプル</h1>
+<p th:if="${param.logout}">ログアウトしました。</p>
+
+<div sec:authorize="!isAuthenticated()">
+  <p>未ログインです。<a th:href="@{/login}">ログイン</a></p>
+</div>
+<div sec:authorize="isAuthenticated()">
+  <p>ログイン中: <span sec:authentication="name">username</span></p>
+  <form th:action="@{/logout}" method="post"><button type="submit">ログアウト</button></form>
+</div>
+
+<h2>URL 認可を試す</h2>
+<ul>
+  <li><a th:href="@{/whoami}">/whoami</a> … 認証済みなら誰でも</li>
+  <li><a th:href="@{/admin/dashboard}">/admin/dashboard</a> … hasRole("ADMIN")</li>
+  <li><a th:href="@{/manager/approvals}">/manager/approvals</a> … hasRole("MANAGER")（階層で admin も可）</li>
+  <li><a th:href="@{/reports/list}">/reports/list</a> … hasAuthority("report:read")</li>
+  <li><a th:href="@{/reports/export/csv}">/reports/export/csv</a> … report:read <b>かつ</b> MANAGER（ハンドラ未定義なので通れば 404 になる = 認可は通過した証拠）</li>
+</ul>
+
+<h2>ログインできるユーザー</h2>
+<table border="1">
+  <tr><th>ユーザー</th><th>パスワード</th><th>権限</th><th>階層適用後に実質持つ ROLE</th></tr>
+  <tr><td>user</td><td>password</td><td>ROLE_USER</td><td>USER</td></tr>
+  <tr><td>manager</td><td>password</td><td>ROLE_MANAGER, report:read</td><td>MANAGER, USER</td></tr>
+  <tr><td>admin</td><td>password</td><td>ROLE_ADMIN, report:read</td><td>ADMIN, MANAGER, USER</td></tr>
+</table>
+</body>
+</html>

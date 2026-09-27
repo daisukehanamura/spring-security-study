@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>01 basics (Boot 2.7)</title>
+</head>
+<body>
+<h1>Spring Boot 2.7 / Spring Security 5.8 サンプル</h1>
+
+<p th:if="${param.logout}">ログアウトしました。</p>
+
+<!-- 未認証のときだけ表示 -->
+<div sec:authorize="!isAuthenticated()">
+  <p>未ログインです。<a th:href="@{/login}">ログイン</a></p>
+</div>
+
+<!-- 認証済みのときだけ表示 -->
+<div sec:authorize="isAuthenticated()">
+  <p>
+    ログイン中: <span sec:authentication="name">username</span>
+    （権限: <span sec:authentication="principal.authorities">authorities</span>）
+  </p>
+  <form th:action="@{/logout}" method="post">
+    <button type="submit">ログアウト</button>
+  </form>
+</div>
+
+<h2>リンク集</h2>
+<ul>
+  <li><a th:href="@{/whoami}">/whoami</a> … 認証済みなら誰でも</li>
+  <li><a th:href="@{/admin/dashboard}">/admin/dashboard</a> … URL 認可で ROLE_ADMIN 必須</li>
+  <li><a th:href="@{/report/admin-only}">/report/admin-only</a> … URL は自由、メソッドセキュリティで ROLE_ADMIN 必須</li>
+</ul>
+
+<!-- 権限に応じたリンクの出し分け（画面側の制御。サーバ側の認可と必ず両方書く） -->
+<div sec:authorize="hasRole('ADMIN')">
+  <p>★ あなたは管理者なので管理メニューが見えています。</p>
+</div>
+
+<h2>ログイン可能なユーザー</h2>
+<table border="1">
+  <tr><th>ユーザー</th><th>パスワード</th><th>権限</th></tr>
+  <tr><td>user</td><td>password</td><td>ROLE_USER</td></tr>
+  <tr><td>admin</td><td>password</td><td>ROLE_USER, ROLE_ADMIN</td></tr>
+</table>
+</body>
+</html>

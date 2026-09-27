@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>whoami</title></head>
+<body>
+<h1>認証情報</h1>
+<ul>
+  <li>ユーザー名: <span th:text="${name}">name</span></li>
+  <li>保持している権限: <span th:text="${authorities}">authorities</span></li>
+</ul>
+<p>※ ROLE 階層による上位 ROLE の展開は、この一覧には現れず「判定時」に効く。</p>
+
+<h2>あなたに見える注文（@PostFilter でフィルタ済み）</h2>
+<table border="1">
+  <tr><th>id</th><th>owner</th><th>amount</th><th>approved</th></tr>
+  <tr th:each="o : ${orders}">
+    <td th:text="${o.id}">1</td>
+    <td th:text="${o.owner}">owner</td>
+    <td th:text="${o.amount}">0</td>
+    <td th:text="${o.approved}">false</td>
+  </tr>
+</table>
+<p><a th:href="@{/}">トップへ</a></p>
+</body>
+</html>

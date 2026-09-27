@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>403</title>
+</head>
+<body>
+<h1>403 Forbidden</h1>
+<p>ログインはできているが、この操作に必要な権限がない状態（認証 OK / 認可 NG）。</p>
+<p>401 と 403 の違い: 401 = 誰だか分からない、403 = 誰だか分かるが許可されていない。</p>
+<p><a th:href="@{/}">トップへ</a></p>
+</body>
+</html>

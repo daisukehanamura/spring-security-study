@@ -1,0 +1,16 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: basics-boot3
+  thymeleaf:
+    cache: false
+
+logging:
+  level:
+    org.springframework.security: INFO
+    # 認可の判定ログを追いたいとき:
+    # org.springframework.security.web.access: TRACE
+    # フィルタの並び順を起動時に出したいとき:
+    # org.springframework.security.web.FilterChainProxy: DEBUG
