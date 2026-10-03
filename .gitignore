@@ -7,3 +7,7 @@ target/
 .settings/
 .classpath
 .project
+
+# Maven Wrapper は distributionType=only-script 構成。
+# jar は ./mvnw が初回実行時に自動ダウンロードするのでコミットしない。
+**/.mvn/wrapper/maven-wrapper.jar
